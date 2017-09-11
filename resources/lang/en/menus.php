@@ -15,6 +15,7 @@ return [
 
     'backend' => [
     	'projects' => [
+    		'title' 		  => 'Project Management',
             'all'             => 'All Projects',
             'create'          => 'Create Project',
             'approved'        => 'Approved Projects',
@@ -57,6 +58,7 @@ return [
             'dashboard' => 'Dashboard',
             'general'   => 'General',
             'system'    => 'System',
+            'project' => 'Project',
         ],
     ],
 

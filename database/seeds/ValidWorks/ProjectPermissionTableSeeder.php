@@ -14,6 +14,11 @@ class ProjectPermissionTableSeeder extends Seeder
      */
     public function run()
     {
+    	/*
+         * Assign view backend to user role
+         */
+        Role::find(3)->permissions()->attach(1);
+
         foreach (['Project', 'Vendor', 'Report'] as $model) {
 
             $permission = 'Manage';
@@ -25,16 +30,11 @@ class ProjectPermissionTableSeeder extends Seeder
             $permit->updated_at   = Carbon::now();
             $permit->save();
 
-            Role::whereIn('id', [3, 4])->each(function($role) use ($permit) {
+            Role::whereIn('id', [2, 3])->each(function($role) use ($permit) {
 			    $role->permissions()->attach([$permit->id]);
 			});
 
         }
-
-        /*
-         * Assign view backend to user role
-         */
-        Role::find(3)->permissions()->sync([1]);
 
     }
 }

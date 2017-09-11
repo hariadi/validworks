@@ -39,6 +39,45 @@
 
             <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
 
+            @permission('manage-project')
+            <li class="{{ active_class(Active::checkUriPattern('admin/projects/*')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-users"></i>
+                    <span>{{ trans('menus.backend.projects.title') }}</span>
+
+                    @if ($pending_approval > 0)
+                        <span class="label label-danger pull-right">{{ $pending_approval }}</span>
+                    @else
+                        <i class="fa fa-angle-left pull-right"></i>
+                    @endif
+                </a>
+
+                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/projects/*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/projects/*'), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/projects/user*')) }}">
+                        <a href="{{ route('admin.projects.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('labels.backend.projects.management') }}</span>
+
+                            @if ($pending_approval > 0)
+                                <span class="label label-danger pull-right">{{ $pending_approval }}</span>
+                            @endif
+                        </a>
+                    </li>
+
+                    @foreach(['approved', 'unapproved'] as $status)
+
+                    <li class="{{ active_class($status == request('status')) }}">
+                        <a href="{{ route('admin.projects.index', ['status' => $status]) }}">
+                            <i class="fa fa-circle-o text-success"></i>
+                            <span>{{ str_replace('-', ' ', title_case($status))  }}</span>
+                        </a>
+                    </li>
+
+                    @endforeach
+                </ul>
+            </li>
+            @endauth
+
             @role(1)
             <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
                 <a href="#">
