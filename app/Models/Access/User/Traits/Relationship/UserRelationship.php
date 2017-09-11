@@ -2,6 +2,7 @@
 
 namespace App\Models\Access\User\Traits\Relationship;
 
+use App\Models\Vendor\Vendor;
 use App\Models\System\Session;
 use App\Models\Access\User\SocialLogin;
 
@@ -10,6 +11,16 @@ use App\Models\Access\User\SocialLogin;
  */
 trait UserRelationship
 {
+	/**
+     * Get the projection's vendor.
+     *
+     * @return \Illuminate\Database\Eloquent\Concerns\belongsTo
+     */
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+
     /**
      * Many-to-Many relations with Role.
      *

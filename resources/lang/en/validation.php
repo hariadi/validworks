@@ -119,6 +119,20 @@ return [
     'attributes' => [
 
         'backend' => [
+        	'projects' => [
+                'approved'          => 'Approved',
+                'title'             => 'Title',
+                'description'       => 'Description',
+                'status'       		=> 'Status',
+                'address'           => 'Address',
+                'longitude'   		=> 'Longitude',
+                'latitude' 			=> 'Latitude',
+                'approved_by' 		=> 'Approved By',
+                'approved_at' 		=> 'Approved At',
+                'started_at' 		=> 'Started At',
+                'ended_at' 			=> 'Ended At',
+            ],
+
             'access' => [
                 'permissions' => [
                     'associated_roles' => 'Associated Roles',

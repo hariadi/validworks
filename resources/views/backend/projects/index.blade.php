@@ -41,7 +41,7 @@
                     <tbody>
                     	@foreach($projects as $project)
                     	<tr>
-                    		<td>{{ $project->uuid }}</td>
+                    		<td>{!! $project->uuid_label !!}</td>
 	                        <td>{{ $project->title }}</td>
 	                        <td>{{ $project->submitBy }}</td>
 	                        <td>{{ $project->vendor->name }}</td>

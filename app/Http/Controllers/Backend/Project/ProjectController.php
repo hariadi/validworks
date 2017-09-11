@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Project;
 
 use Illuminate\Http\Request;
+use App\Models\Project\Project;
 use App\Http\Controllers\Controller;
 use App\Repositories\Backend\Project\ProjectRepository;
 
@@ -34,7 +35,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.projects.create');
     }
 
     /**
@@ -45,7 +46,11 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->projects->create($request->all());
+
+        return redirect()
+            ->route('admin.projects.index')
+            ->withFlashSuccess(trans('alerts.backend.projections.created'));
     }
 
     /**
@@ -54,9 +59,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        return view('backend.projects.show')->withProject($project);
     }
 
     /**
@@ -65,9 +70,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('backend.projects.edit')->withProject($project);
     }
 
     /**

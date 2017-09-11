@@ -2,9 +2,10 @@
 
 namespace App\Repositories\Backend\Project;
 
+use Ramsey\Uuid\Uuid;
 use App\Models\Project\Project;
-use App\Repositories\BaseRepository;
 use App\Exceptions\GeneralException;
+use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 
 class ProjectRepository extends BaseRepository
@@ -53,6 +54,10 @@ class ProjectRepository extends BaseRepository
     public function create($input)
     {
         $project = $this->createProjectStub($input);
+
+        $project->uuid = Uuid::uuid4()->toString();
+        $project->user_id = access()->id();
+        $project->vendor_id = access()->user()->vendor->id;
 
         if ($project->save()) {
         	// event(new ProjectCreated($project));

@@ -15,6 +15,14 @@ trait ProjectAttribute
     /**
      * @return string
      */
+    public function getUuidLabelAttribute()
+    {
+        return "<code>". $this->uuid .'</code>';
+    }
+
+    /**
+     * @return string
+     */
     public function getStatusAttribute()
     {
         if ($this->isApproved()) {

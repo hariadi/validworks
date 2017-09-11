@@ -2,7 +2,7 @@
     {{ link_to_route('admin.projects.index', trans('menus.backend.projects.all'), [], ['class' => 'btn btn-primary btn-xs']) }}
     {{ link_to_route('admin.projects.create', trans('menus.backend.projects.create'), [], ['class' => 'btn btn-success btn-xs']) }}
     {{ link_to_route('admin.projects.index', trans('menus.backend.projects.approved'), ['status' => 'approved'], ['class' => 'btn btn-warning btn-xs']) }}
-    {{ link_to_route('admin.projects.index', trans('menus.backend.projects.unupproved'), ['status' => 'unapproved'], ['class' => 'btn btn-danger btn-xs']) }}
+    {{ link_to_route('admin.projects.index', trans('menus.backend.projects.unapproved'), ['status' => 'unapproved'], ['class' => 'btn btn-danger btn-xs']) }}
 </div><!--pull right-->
 
 <div class="pull-right mb-10 hidden-lg hidden-md">

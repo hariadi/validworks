@@ -14,6 +14,16 @@ return [
     */
 
     'backend' => [
+    	'projects' => [
+            'all'             => 'All Projects',
+            'create'          => 'Create Project',
+            'approved'        => 'Approved Projects',
+            'unapproved'      => 'Unapproved Projects',
+            'edit'            => 'Edit Project',
+            'main'            => 'Projects',
+            'view'            => 'View Project',
+        ],
+
         'access' => [
             'title' => 'Access Management',
 

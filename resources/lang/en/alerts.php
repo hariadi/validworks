@@ -14,6 +14,12 @@ return [
     */
 
     'backend' => [
+    	'projects' => [
+            'created' => 'The project was successfully created.',
+            'deleted' => 'The project was successfully deleted.',
+            'updated' => 'The project was successfully updated.',
+        ],
+
         'roles' => [
             'created' => 'The role was successfully created.',
             'deleted' => 'The role was successfully deleted.',
