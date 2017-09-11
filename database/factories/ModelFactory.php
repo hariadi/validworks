@@ -1,6 +1,9 @@
 <?php
 
+use Carbon\Carbon;
 use Faker\Generator;
+use App\Models\Vendor\Vendor;
+use App\Models\Project\Project;
 use App\Models\Access\Role\Role;
 use App\Models\Access\User\User;
 
@@ -66,5 +69,42 @@ $factory->define(Role::class, function (Generator $faker) {
 $factory->state(Role::class, 'admin', function () {
     return [
         'all' => 1,
+    ];
+});
+
+$factory->define(Vendor::class, function (Generator $faker) {
+    return [
+        'name' => $faker->company,
+    ];
+});
+
+$factory->define(Project::class, function (Generator $faker) {
+
+	$start = Carbon::now();
+
+    return [
+    	'user_id' => function () {
+            return factory(User::class)->states('active')->create()->id;
+        },
+    	'vendor_id' => function () {
+            return factory(Vendor::class)->create()->id;
+        },
+        'uuid'        		=> $faker->uuid,
+        'title'         	=> $faker->sentence,
+        'description'       => $faker->paragraph,
+        'address'          	=> $faker->address,
+        'latitude'    		=> $faker->latitude,
+        'longitude'   		=> $faker->longitude,
+        'started_at'   		=> $start,
+        'ended_at'   		=> $start->copy()->addDays(3),
+    ];
+});
+
+$factory->state(Project::class, 'approved', function () {
+    return [
+        'approved_by' => function () {
+            return factory(User::class)->states('active')->create()->id;
+        },
+        'approved_at' => Carbon::now()
     ];
 });

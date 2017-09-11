@@ -32,6 +32,19 @@ return [
     ],
 
     'backend' => [
+    	'projects' => [
+            'create'     => 'Create Project',
+            'lists'       => 'ProjectLists ',
+            'edit'       => 'Edit Project',
+            'management' => 'Project Management',
+
+            'table' => [
+                'number_of_projects' => 'Number of Projects',
+                'sort'            => 'Sort',
+                'total'           => 'project total|projects total',
+            ],
+        ],
+
         'access' => [
             'roles' => [
                 'create'     => 'Create Role',

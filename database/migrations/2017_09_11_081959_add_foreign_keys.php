@@ -15,7 +15,7 @@ class AddForeignKeys extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('vendor_id')->references('id')->on('vendors');
         });
     }
 
@@ -28,7 +28,7 @@ class AddForeignKeys extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->dropForeign('projects_user_id_foreign');
-            $table->dropForeign('projects_company_id_foreign');
+            $table->dropForeign('projects_vendor_id_foreign');
         });
     }
 }
