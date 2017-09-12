@@ -14,6 +14,12 @@ return [
     */
 
     'backend' => [
+    	'projects' => [
+    		'already_approved' => 'This project is already approved.',
+    		'not_approved' => 'This project is not approved.',
+    		'cant_unapprove' => 'There was a problem to approve the project.',
+    	],
+
         'access' => [
             'roles' => [
                 'already_exists'    => 'That role already exists. Please choose a different name.',

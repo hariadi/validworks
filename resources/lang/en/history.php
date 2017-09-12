@@ -22,6 +22,8 @@ return [
             'created' => 'created project',
             'deleted' => 'deleted project',
             'updated' => 'updated project',
+            'approved' => 'approved project',
+            'unapproved' => 'unapproved project',
         ],
 
         'roles' => [

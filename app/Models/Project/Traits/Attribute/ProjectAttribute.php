@@ -65,6 +65,22 @@ trait ProjectAttribute
     /**
      * @return string
      */
+    public function getApprovedButtonAttribute()
+    {
+    	if (access()->user()->hasRole('User')) {
+    		return '';
+    	}
+
+    	$action = !$this->isApproved() ? 'approve' : 'unapprove';
+    	$css = !$this->isApproved() ? 'success' : 'warning';
+    	$icon = !$this->isApproved() ? 'up' : 'down';
+
+        return '<a href="'.route('admin.projects.'. $action, $this).'" class="btn btn-xs btn-'. $css .'"><i class="fa fa-thumbs-o-'. $icon .'" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.backend.projects.'. $action).'"></i></a> ';
+    }
+
+    /**
+     * @return string
+     */
     public function getEditButtonAttribute()
     {
         return '<a href="'.route('admin.projects.edit', $this).'" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.edit').'"></i></a> ';
@@ -95,7 +111,7 @@ trait ProjectAttribute
         return
             $this->show_button.
             $this->edit_button.
-            //$this->approve_button.
+            $this->approved_button.
             $this->delete_button;
     }
 }

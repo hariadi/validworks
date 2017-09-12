@@ -67,7 +67,7 @@ class ProjectEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->project->id)
-            ->withText('trans("history.backend.projects.reactivated") <strong>{project}</strong>')
+            ->withText('trans("history.backend.projects.approved") <strong>{project}</strong>')
             ->withIcon('check')
             ->withClass('bg-green')
             ->withAssets([
@@ -83,7 +83,7 @@ class ProjectEventListener
     {
         history()->withType($this->history_slug)
             ->withEntity($event->project->id)
-            ->withText('trans("history.backend.projects.unconfirmed") <strong>{project}</strong>')
+            ->withText('trans("history.backend.projects.unapproved") <strong>{project}</strong>')
             ->withIcon('times')
             ->withClass('bg-red')
             ->withAssets([

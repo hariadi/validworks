@@ -12,8 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 use App\Events\Backend\Project\ProjectCreated;
 use App\Events\Backend\Project\ProjectDeleted;
 use App\Events\Backend\Project\ProjectUpdated;
+use App\Events\Backend\Project\ProjectApproved;
+use App\Events\Backend\Project\ProjectUnapproved;
 use App\Notifications\Backend\Project\ProjectVendorCreated;
 use App\Notifications\Backend\Project\ProjectVendorApproved;
+use App\Notifications\Backend\Project\ProjectVendorUnapproved;
 
 class ProjectRepository extends BaseRepository
 {
@@ -139,7 +142,7 @@ class ProjectRepository extends BaseRepository
      * @return bool
      * @throws GeneralException
      */
-    public function confirm(Model $project)
+    public function approve(Model $project)
     {
         if ($project->approved_at == 1) {
             throw new GeneralException(trans('exceptions.backend.projects.already_approved'));
@@ -156,11 +159,38 @@ class ProjectRepository extends BaseRepository
             // Let vendor know their account was approved
             $vendor->notify(new ProjectVendorApproved($project));
 
-
             return true;
         }
 
         throw new GeneralException(trans('exceptions.backend.projects.cant_confirm'));
+    }
+
+    /**
+     * @param Model $project
+     *
+     * @return bool
+     * @throws GeneralException
+     */
+    public function unapprove(Model $project)
+    {
+        if (is_null($project->approved_at)) {
+            throw new GeneralException(trans('exceptions.backend.access.projects.not_approved'));
+        }
+
+        $vendor = $project->user;
+
+        $project->approved_at = null;
+        $project->approved_by = null;
+
+        if ($project->save()) {
+            event(new ProjectUnapproved($project));
+
+            $vendor->notify(new ProjectVendorApproved($project));
+
+            return true;
+        }
+
+        throw new GeneralException(trans('exceptions.backend.projects.cant_unapprove')); // TODO
     }
 
     /**

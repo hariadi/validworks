@@ -74,6 +74,7 @@ return [
     	'project' => [
     		'created' => 'Project has been created and need your approval.',
     		'approved' => 'Your project has been approved.',
+    		'unapproved' => 'Your project has been unapproved.',
     	],
         'auth' => [
             'account_confirmed' => 'Your account has been confirmed.',

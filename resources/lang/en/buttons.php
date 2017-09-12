@@ -14,6 +14,11 @@ return [
     */
 
     'backend' => [
+    	'projects' => [
+    		'approve' => 'Approve',
+    		'unapprove' => 'Unapprove'
+    	],
+
         'access' => [
             'users' => [
                 'activate'           => 'Activate',

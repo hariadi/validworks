@@ -8,6 +8,7 @@ use App\Filters\ProjectFilters;
 use App\Models\Project\Project;
 use App\Http\Controllers\Controller;
 use App\Repositories\Backend\Project\ProjectRepository;
+use App\Http\Requests\Backend\Project\ApproveProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -25,11 +26,13 @@ class ProjectController extends Controller
      */
     public function index(ProjectFilters $filters)
     {
-    	$projects = $this->projects
-    		->latest()
-    		->filter($filters)
-    		->byVendor(access()->user())
-    		->paginate();
+    	$projects = $this->projects->latest()->filter($filters);
+
+    	if (access()->user()->hasRole('User')) {
+    		$projects->byVendor(access()->user());
+    	}
+
+    	$projects = $projects->paginate();
 
         return view('backend.projects.index')->withProjects($projects);
     }
@@ -108,5 +111,31 @@ class ProjectController extends Controller
         $this->projects->destroy($project);
 
         return redirect()->route('admin.projects.index')->withFlashSuccess(trans('alerts.backend.projects.deleted'));
+    }
+
+    /**
+     * @param Project              $project
+     * @param ApproveProjectRequest $request
+     *
+     * @return mixed
+     */
+    public function approve(Project $project, ApproveProjectRequest $request)
+    {
+        $this->projects->approve($project);
+
+        return redirect()->route('admin.projects.index')->withFlashSuccess(trans('alerts.backend.projects.approved'));
+    }
+
+    /**
+     * @param Project              $project
+     * @param ApproveProjectRequest $request
+     *
+     * @return mixed
+     */
+    public function unapprove(Project $project, ApproveProjectRequest $request)
+    {
+        $this->projects->unapprove($project);
+
+        return redirect()->route('admin.projects.index')->withFlashSuccess(trans('alerts.backend.projects.unapproveed'));
     }
 }

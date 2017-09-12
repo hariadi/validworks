@@ -18,6 +18,8 @@ return [
             'created' => 'The project was successfully created.',
             'deleted' => 'The project was successfully deleted.',
             'updated' => 'The project was successfully updated.',
+            'approved' => 'The project was successfully approved.',
+            'unapproveed' => 'The project was successfully unapproved.',
         ],
 
         'roles' => [
