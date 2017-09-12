@@ -72,7 +72,7 @@ return [
 
     'emails' => [
     	'project' => [
-    		'created' => 'Project has been created and need your approved.',
+    		'created' => 'Project has been created and need your approval.',
     		'approved' => 'Your project has been approved.',
     	],
         'auth' => [

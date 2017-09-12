@@ -66,6 +66,7 @@ return [
                         'first_name'   => 'First Name',
                         'last_name'    => 'Last Name',
                         'status'       => 'Status',
+                        'approved'	   => 'Approved',
                     ],
                 ],
             ],

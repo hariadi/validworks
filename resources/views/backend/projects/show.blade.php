@@ -15,7 +15,7 @@
             <h3 class="box-title">{{ trans('labels.backend.projects.view') }}</h3>
 
             <div class="box-tools pull-right">
-                @include('backend.access.includes.partials.user-header-buttons')
+                @include('backend.projects.includes.project-header-buttons')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
 

@@ -24,6 +24,7 @@ return [
         'login'     => 'Login',
         'macros'    => 'Macros',
         'register'  => 'Register',
+        'became_investor' => 'Became investor!',
 
         'user' => [
             'account'         => 'My Account',

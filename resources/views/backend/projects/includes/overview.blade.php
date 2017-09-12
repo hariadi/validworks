@@ -1,14 +1,16 @@
-<table class="table table-striped table-hover">
+<table class="table table-hover">
 
     <tr>
         <th>{{ trans('labels.backend.projects.tabs.content.overview.title') }}</th>
         <td>{{ $project->title }}</td>
     </tr>
 
+    @if(isset($description) && $description === true)
     <tr>
         <th>{{ trans('labels.backend.projects.tabs.content.overview.description') }}</th>
         <td>{{ $project->description }}</td>
     </tr>
+    @endif
 
     <tr>
         <th>{{ trans('labels.backend.projects.tabs.content.overview.vendor') }}</th>
@@ -21,7 +23,7 @@
     </tr>
 
     <tr>
-        <th>{{ trans('labels.backend.projects.tabs.content.overview.status') }}</th>
+        <th>{{ trans('labels.backend.projects.tabs.content.overview.approved') }}</th>
         <td>{!! $project->status !!}</td>
     </tr>
 

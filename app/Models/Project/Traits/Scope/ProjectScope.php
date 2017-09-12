@@ -18,7 +18,18 @@ trait ProjectScope
      */
     public function scopeApproved($query)
     {
-        return $query->whereNotNul('approved_at');
+        return $query->whereNotNull('approved_at');
+    }
+
+    /**
+     * @param $query
+     * @param bool $status
+     *
+     * @return mixed
+     */
+    public function scopeUuid($query, $uuid)
+    {
+        return $query->where('uuid', $uuid);
     }
 
     /**
