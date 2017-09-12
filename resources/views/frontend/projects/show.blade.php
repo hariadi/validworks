@@ -9,7 +9,9 @@
 
                 <div class="panel-body">
                 	<div class="row">
-                		<div class="col-md-7">Maps</div>
+                		<div class="col-md-7">
+                		{{ var_dump($locations) }}
+                		</div>
                 		<div class="col-md-5">
 	                		<div class="panel panel-info">
 	                			<div class="panel-heading">Detail</div>
@@ -17,6 +19,11 @@
 	                			{{ $project->description }}
 	                			</div>
 	                			@include('backend.projects.includes.overview')
+	                			<div class="panel-footer">
+	                				<a href="#" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i> Report</a>
+
+	                				<a href="#"><i class="fa fa-facebook-official"></i></a>
+	                			</div>
 	                		</div>
                 		</div>
                 	</div>
