@@ -7,6 +7,14 @@ namespace App\Models\Access\User\Traits\Attribute;
  */
 trait UserAttribute
 {
+	/**
+     * @return mixed
+     */
+    public function getPointAttribute()
+    {
+        return $this->verifies->count() ?: 0;
+    }
+
     /**
      * @return mixed
      */

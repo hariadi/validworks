@@ -69,7 +69,7 @@
 				var choice = $(this).attr('data-choice');
 
 				@if(auth()->check())
-				toastr.success("1 point has been awarded for verification");
+				toastr.success("1 point has been awarded for verification. Your current point now is <b>{{ access()->user()->point+1 }}</b>");
 				@endif
 
 				$.post( "{{ route('frontend.projects.verify', $project) }}", {
