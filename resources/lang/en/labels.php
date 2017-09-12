@@ -33,8 +33,9 @@ return [
 
     'backend' => [
     	'projects' => [
+    		'view'		=> 'View Project',
             'create'     => 'Create Project',
-            'lists'       => 'ProjectLists ',
+            'lists'       => 'Project Lists ',
             'edit'       => 'Edit Project',
             'management' => 'Project Management',
 
@@ -42,6 +43,31 @@ return [
                 'number_of_projects' => 'Number of Projects',
                 'sort'            => 'Sort',
                 'total'           => 'project total|projects total',
+            ],
+
+            'tabs' => [
+                'titles' => [
+                    'overview' => 'Overview',
+                    'history'  => 'History',
+                ],
+
+                'content' => [
+                    'overview' => [
+                    	'title'			=> 'Title',
+                    	'description'	=> 'Description',
+                    	'vendor'		=> 'Vendor',
+                        'approved'    => 'Approved',
+                        'started_at'   => 'Started At',
+                        'ended_at'   => 'Ended At',
+                        'created_at'   => 'Created At',
+                        'submit_by'     => 'Submit By',
+                        'last_updated' => 'Last Updated',
+                        'name'         => 'Name',
+                        'first_name'   => 'First Name',
+                        'last_name'    => 'Last Name',
+                        'status'       => 'Status',
+                    ],
+                ],
             ],
         ],
 
@@ -118,6 +144,10 @@ return [
     ],
 
     'frontend' => [
+
+    	'project' => [
+            'view_button'       => 'View Project',
+        ],
 
         'auth' => [
             'login_box_title'    => 'Login',

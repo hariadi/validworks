@@ -71,6 +71,10 @@ return [
     ],
 
     'emails' => [
+    	'project' => [
+    		'created' => 'Project has been created and need your approved.',
+    		'approved' => 'Your project has been approved.',
+    	],
         'auth' => [
             'account_confirmed' => 'Your account has been confirmed.',
             'error'                   => 'Whoops!',

@@ -55,6 +55,10 @@
                 </table>
             </div><!--table-responsive-->
         </div><!-- /.box-body -->
+
+        <div class="box-footer clearfix">
+        {{ $projects->appends(request()->only('status'))->links() }}
+        </div>
     </div><!--box-->
 
     <div class="box box-info">

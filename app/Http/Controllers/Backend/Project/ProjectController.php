@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend\Project;
 
 use Illuminate\Http\Request;
+use App\Models\Vendor\Vendor;
+use App\Filters\ProjectFilters;
 use App\Models\Project\Project;
 use App\Http\Controllers\Controller;
 use App\Repositories\Backend\Project\ProjectRepository;
@@ -21,9 +23,13 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ProjectFilters $filters)
     {
-    	$projects = $this->projects->getAll();
+    	$projects = $this->projects
+    		->latest()
+    		->filter($filters)
+    		->byVendor(access()->user())
+    		->paginate();
 
         return view('backend.projects.index')->withProjects($projects);
     }
@@ -50,7 +56,7 @@ class ProjectController extends Controller
 
         return redirect()
             ->route('admin.projects.index')
-            ->withFlashSuccess(trans('alerts.backend.projections.created'));
+            ->withFlashSuccess(trans('alerts.backend.projects.created'));
     }
 
     /**
@@ -82,9 +88,13 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Project $project, Request $request)
     {
-        //
+        $this->projects->update($project, $request->all());
+
+        return redirect()
+            ->route('admin.projects.index')
+            ->withFlashSuccess(trans('alerts.backend.projects.updated'));
     }
 
     /**
@@ -93,8 +103,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $this->projects->destroy($project);
+
+        return redirect()->route('admin.projects.index')->withFlashSuccess(trans('alerts.backend.projects.deleted'));
     }
 }

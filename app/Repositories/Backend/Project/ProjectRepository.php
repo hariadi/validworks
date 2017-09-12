@@ -2,11 +2,18 @@
 
 namespace App\Repositories\Backend\Project;
 
+use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
 use App\Models\Project\Project;
+use App\Models\Access\User\User;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
+use App\Events\Backend\Project\ProjectCreated;
+use App\Events\Backend\Project\ProjectDeleted;
+use App\Events\Backend\Project\ProjectUpdated;
+use App\Notifications\Backend\Project\ProjectVendorCreated;
+use App\Notifications\Backend\Project\ProjectVendorApproved;
 
 class ProjectRepository extends BaseRepository
 {
@@ -28,9 +35,41 @@ class ProjectRepository extends BaseRepository
      *
      * @return \Illuminate\Database\Eloquent\Collection|\Project[]
      */
-    public function getAll($order_by = 'id', $sort = 'asc')
+    public function getAll($order_by = 'id', $sort = 'desc')
     {
         return $this->query()->orderBy($order_by, $sort)->get();
+    }
+
+    /**
+     * Get all instance of Project.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\Project[]
+     */
+    public function getByVendor($vendors, $by = 'name', $order_by = 'id', $sort = 'desc', $paginate = 25)
+    {
+    	if ($vendors instanceof User) {
+    		$vendors = $vendors->vendor_id;
+    	}
+
+    	if (! is_array($vendors)) {
+            $vendors = [$vendors];
+        }
+
+        if ($paginate) {
+        	return $this->query()->orderBy($order_by, $sort)->whereIn('vendor_id', $vendors)->paginate($paginate);
+        }
+
+        return $this->query()->orderBy($order_by, $sort)->whereIn('vendor_id', $vendors)->get();
+    }
+
+    /**
+     * Get latest Projection.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|\Projection[]
+     */
+    public function latest()
+    {
+        return $this->query()->latest();
     }
 
    /**
@@ -60,7 +99,15 @@ class ProjectRepository extends BaseRepository
         $project->vendor_id = access()->user()->vendor->id;
 
         if ($project->save()) {
-        	// event(new ProjectCreated($project));
+        	event(new ProjectCreated($project));
+
+        	$agencies = User::whereHas('roles', function ($query) {
+	            $query->where('roles.name', 'Executive');
+	        })->get();
+
+        	foreach ($agencies as $pbt) {
+        		$pbt->notify(new ProjectVendorCreated($project));
+        	}
 
         	return $project;
         }
@@ -78,12 +125,42 @@ class ProjectRepository extends BaseRepository
     public function update(Model $project, array $input)
     {
         if ($project->update($input)) {
-    		//event(new ProjectUpdated($project));
+    		event(new ProjectUpdated($project));
 
     		return $project;
     	}
 
         throw new GeneralException('There was a problem updating this project. Please try again.');
+    }
+
+    /**
+     * @param Model $project
+     *
+     * @return bool
+     * @throws GeneralException
+     */
+    public function confirm(Model $project)
+    {
+        if ($project->approved_at == 1) {
+            throw new GeneralException(trans('exceptions.backend.projects.already_approved'));
+        }
+
+        $vendor = $project->user;
+
+        $project->approved_at = Carbon::now();
+        $project->approved_by = access()->id();
+
+        if ($project->save()) {
+            event(new ProjectApproved($project));
+
+            // Let vendor know their account was approved
+            $vendor->notify(new ProjectVendorApproved($project));
+
+
+            return true;
+        }
+
+        throw new GeneralException(trans('exceptions.backend.projects.cant_confirm'));
     }
 
     /**
@@ -94,7 +171,7 @@ class ProjectRepository extends BaseRepository
     public function destroy(Model $project)
     {
         if ($project->delete()) {
-            //event(new ProjectDeleted($project));
+            event(new ProjectDeleted($project));
 
             return true;
         }

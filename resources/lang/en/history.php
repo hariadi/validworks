@@ -18,6 +18,12 @@ return [
         'none_for_entity' => 'There is no history for this :entity.',
         'recent_history'  => 'Recent History',
 
+        'projects' => [
+            'created' => 'created project',
+            'deleted' => 'deleted project',
+            'updated' => 'updated project',
+        ],
+
         'roles' => [
             'created' => 'created role',
             'deleted' => 'deleted role',
