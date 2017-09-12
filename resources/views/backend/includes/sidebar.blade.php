@@ -64,11 +64,11 @@
                         </a>
                     </li>
 
-                    @foreach(['approved', 'unapproved'] as $status)
+                    @foreach(config('validworks.statuses') as $status => $css)
 
                     <li class="{{ active_class($status == request('status')) }}">
                         <a href="{{ route('admin.projects.index', ['status' => $status]) }}">
-                            <i class="fa fa-circle-o text-success"></i>
+                            <i class="fa fa-circle-o {{ $css }}"></i>
                             <span>{{ str_replace('-', ' ', title_case($status))  }}</span>
                         </a>
                     </li>
