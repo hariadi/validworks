@@ -10,19 +10,24 @@
                 <div class="panel-body">
                 	<div class="row">
                 		<div class="col-md-7">
-                		{{ var_dump($locations) }}
+                		{{ var_dump($locations, request()->ip()) }}
                 		</div>
                 		<div class="col-md-5">
 	                		<div class="panel panel-info">
 	                			<div class="panel-heading">Detail</div>
-	                			<div class="panel-body">
-	                			{{ $project->description }}
-	                			</div>
+	                			<div class="panel-body">{{ $project->description }}</div>
 	                			@include('backend.projects.includes.overview')
-	                			<div class="panel-footer">
-	                				<a href="#" class="btn btn-danger"><i class="fa fa-exclamation-triangle"></i> Report</a>
+	                			<div class="panel-footer panel-verify">
+	                				@if(!$project->isVerified())
+	                				<button type="button" class="btn btn-success btn-verify" data-choice="Yes">Yes</button>
 
-	                				<a href="#"><i class="fa fa-facebook-official"></i></a>
+	                				<button type="button" class="btn btn-danger btn-verify" data-choice="No">No</button>
+
+
+	                				<span>Work site at the right location?</span>
+	                				@else
+	                				<span>Work site has been verified</span>
+	                				@endif
 	                			</div>
 	                		</div>
                 		</div>
@@ -31,4 +36,53 @@
              </div>
 		</div>
 	</div>
+@endsection
+
+@section('after-styles')
+    {{ Html::style('plugins/toastr/toastr.min.css') }}
+@endsection
+
+@section('after-scripts')
+    {{ Html::script('plugins/toastr/toastr.min.js') }}
+
+    <script>
+		$(function () {
+			toastr.options = {
+		        closeButton: true,
+		        debug: false,
+		        positionClass: "toast-bottom-right",
+		        onclick: null,
+		        showDuration: "300",
+		        hideDuration: "1000",
+		        //timeOut: "2000",
+		        timeOut: "NEVER",
+		        extendedTimeOut: "1000",
+		        showEasing: "swing",
+		        hideEasing: "linear",
+		        showMethod: "fadeIn",
+		        hideMethod: "fadeOut"
+		    }
+
+			$('.btn-verify').on('click', function(e) {
+				e.preventDefault();
+
+				var choice = $(this).attr('data-choice');
+
+				@if(auth()->check())
+				toastr.success("1 point has been awarded for verification");
+				@endif
+
+				$.post( "{{ route('frontend.projects.verify', $project) }}", {
+					choice: choice,
+					@if(isset($locations))
+					lat: "{{ $locations['lat'] }}",
+					long: "{{ $locations['long'] }}",
+					@endif
+				}, function( response ) {
+					$('.panel-verify').html( "<span>Thanks!</span>" );
+					toastr.success(response.message);
+				}, "json");
+			});
+		});
+	</script>
 @endsection

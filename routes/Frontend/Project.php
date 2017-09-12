@@ -6,19 +6,8 @@
  */
 Route::group(['namespace' => 'Project'], function () {
 
-    /*
-     * These routes require the user to be logged in
-     */
-    Route::group(['middleware' => 'auth'], function () {
-    	//
-    });
+	Route::get('projects/{uuid}', 'ProjectController@check')->name('projects.check');
+	Route::post('projects/{project}', 'ProjectController@verify')->name('projects.verify');
+	Route::get('projects/{project}/report', 'ProjectController@report')->name('projects.report');
 
-    /*
-     * These routes require no user to be logged in
-     */
-    Route::group(['middleware' => 'guest'], function () {
-
-    	Route::get('projects/{uuid}', 'ProjectController@check')->name('projects.check');
-
-    });
 });

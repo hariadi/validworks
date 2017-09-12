@@ -2,7 +2,9 @@
 
 namespace App\Models\Project\Traits\Relationship;
 
+use App\Models\Report\Report;
 use App\Models\Vendor\Vendor;
+use App\Models\Verify\Verify;
 use App\Models\Access\User\User;
 
 /**
@@ -28,5 +30,13 @@ trait ProjectRelationship
     public function vendor()
     {
         return $this->belongsTo(Vendor::class);
+    }
+
+    /**
+     * Get all of the project's verifies.
+     */
+    public function verifies()
+    {
+        return $this->hasMany(Verify::class);
     }
 }

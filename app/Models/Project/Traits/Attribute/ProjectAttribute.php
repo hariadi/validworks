@@ -7,6 +7,11 @@ namespace App\Models\Project\Traits\Attribute;
  */
 trait ProjectAttribute
 {
+	public function isVerified()
+    {
+    	return $this->verifies->contains('ip', request()->ip());
+    }
+
     public function getSubmitByAttribute()
     {
     	return $this->user->full_name;

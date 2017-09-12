@@ -12,7 +12,8 @@ let WebpackRTLPlugin = require('webpack-rtl-plugin');
  |
  */
 
-mix.sass('resources/assets/sass/frontend/app.scss', 'public/css/frontend.css')
+mix.copyDirectory('resources/plugins', 'public/plugins')
+	.sass('resources/assets/sass/frontend/app.scss', 'public/css/frontend.css')
     .sass('resources/assets/sass/backend/app.scss', 'public/css/backend.css')
     .js([
         'resources/assets/js/frontend/app.js',
