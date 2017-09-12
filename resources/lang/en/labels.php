@@ -53,6 +53,7 @@ return [
 
                 'content' => [
                     'overview' => [
+                    	'qrcode'		=> 'Qr Code',
                     	'title'			=> 'Title',
                     	'description'	=> 'Description',
                     	'vendor'		=> 'Vendor',

@@ -2,11 +2,18 @@
 
 namespace App\Models\Project\Traits\Attribute;
 
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 /**
  * Class ProjectAttribute
  */
 trait ProjectAttribute
 {
+	public function getQrCodeAttribute()
+    {
+    	return '<img src="data:image/png;base64, ' .base64_encode(QrCode::format('png')->size(200)->generate(route('frontend.projects.check', $this->uuid))) .'" class="img-thumbnail">';
+    }
+
 	public function isVerified()
     {
     	return $this->verifies->contains('ip', request()->ip());

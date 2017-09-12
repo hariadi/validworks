@@ -1,5 +1,10 @@
 <table class="table table-hover">
 
+	<tr>
+        <th>{{ trans('labels.backend.projects.tabs.content.overview.qrcode') }}</th>
+        <td>{!! $project->qrcode !!}</td>
+    </tr>
+
     <tr>
         <th>{{ trans('labels.backend.projects.tabs.content.overview.title') }}</th>
         <td>{{ $project->title }}</td>
