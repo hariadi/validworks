@@ -14,12 +14,21 @@ return [
     */
 
     'backend' => [
+
+    	'reports' => [
+            'created' => 'The report was successfully created.',
+            'deleted' => 'The report was successfully deleted.',
+            'updated' => 'The report was successfully updated.',
+            'solved' => 'The report was successfully solved.',
+            'unsolved' => 'The report was successfully unsolved.',
+        ],
+
     	'projects' => [
             'created' => 'The project was successfully created.',
             'deleted' => 'The project was successfully deleted.',
             'updated' => 'The project was successfully updated.',
             'approved' => 'The project was successfully approved.',
-            'unapproveed' => 'The project was successfully unapproved.',
+            'unapproved' => 'The project was successfully unapproved.',
         ],
 
         'roles' => [

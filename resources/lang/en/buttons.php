@@ -14,6 +14,12 @@ return [
     */
 
     'backend' => [
+
+    	'reports' => [
+    		'solve' => 'Solve',
+    		'unsolve' => 'Unsolve'
+    	],
+
     	'projects' => [
     		'approve' => 'Approve',
     		'unapprove' => 'Unapprove'

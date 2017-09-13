@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Report\Report;
 use App\Http\Controllers\Controller;
 
 /**
@@ -14,6 +15,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('backend.dashboard');
+    	$reports = Report::latest()->paginate(5);
+
+        return view('backend.dashboard')->withReports($reports);
     }
 }

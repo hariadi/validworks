@@ -76,6 +76,13 @@
                     @endforeach
                 </ul>
             </li>
+
+            <li class="{{ active_class(Active::checkUriPattern('admin/reports/*')) }}">
+                <a href="{{ route('admin.reports.index') }}">
+                    <i class="fa fa-pie-chart"></i>
+                    <span>{{ trans('menus.backend.reports.title') }}</span>
+                </a>
+            </li>
             @endauth
 
             @role(1)

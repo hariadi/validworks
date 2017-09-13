@@ -61,7 +61,7 @@ trait ProjectAttribute
     public function getApproveButtonAttribute()
     {
         if (! $this->isApproved()) {
-            return '<a href="'.route('admin.projects.account.confirm.resend', $this).'" class="btn btn-xs btn-success"><i class="fa fa-refresh" data-toggle="tooltip" data-placement="top" title='.trans('buttons.backend.projectss.resend_email').'"></i></a> ';
+            return '<a href="'.route('admin.projects.approve', $this).'" class="btn btn-xs btn-success"><i class="fa fa-refresh" data-toggle="tooltip" data-placement="top" title='.trans('buttons.backend.projects.approve').'"></i></a> ';
         }
 
         return '';

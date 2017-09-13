@@ -127,3 +127,9 @@ $factory->define(Report::class, function (Generator $faker) {
         'feedback' => $faker->paragraph
     ];
 });
+
+$factory->state(Report::class, 'solved', function () {
+    return [
+        'solved_at' => Carbon::now()
+    ];
+});

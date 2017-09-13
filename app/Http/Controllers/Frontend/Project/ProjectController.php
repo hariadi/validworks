@@ -9,6 +9,17 @@ use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
 {
+	/**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Project $project)
+    {
+        return view('frontend.projects.show')->withProject($project);
+    }
+
     public function check($uuid, Request $request)
     {
     	$project = Project::uuid($uuid)->approved()->first();

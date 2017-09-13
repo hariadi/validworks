@@ -77,14 +77,37 @@
             </div><!-- /.box tools -->
         </div><!-- /.box-header -->
         <div class="box-body">
-            <table class="table">
-            	<thead>
-            		<tr>
-            			<th></th>
-            		</tr>
-            	</thead>
-            </table>
+            <div class="table-responsive">
+                <table id="users-table" class="table table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Submit by</th>
+                        <th>Project</th>
+                        <th>Feedback</th>
+                        <th>Created</th>
+                        <th>{{ trans('labels.general.actions') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    	@foreach($reports as $report)
+                    	<tr>
+                    		<td>{!! $report->id !!}</td>
+	                        <td>{{ $report->submit_by }}</td>
+	                        <td>{{ $report->project->title }}</td>
+	                        <td>{!! $report->feedback !!}</td>
+	                        <td>{{ $report->created_at->diffForHumans() }}</td>
+	                        <td>{!! $report->action_buttons !!}</td>
+                    	</tr>
+                    	@endforeach
+                    </tbody>
+                </table>
+            </div><!--table-responsive-->
         </div><!-- /.box-body -->
+
+        <div class="box-footer clearfix">
+        {{ $reports->links() }}
+        </div>
     </div><!--box box-success-->
 
     <div class="box box-info">

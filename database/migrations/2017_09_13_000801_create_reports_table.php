@@ -19,6 +19,7 @@ class CreateReportsTable extends Migration
              $table->unsignedInteger('project_id')->nullable();
             $table->string('ip');
             $table->text('feedback');
+            $table->timestamp('solved_at')->nullable();
             $table->timestamps();
         });
     }

@@ -32,7 +32,7 @@
 	                    <div class="timeline-item">
 	                      <span class="time"><i class="fa fa-clock-o"></i> {{ $project->started_at->format('g:i A')  }}</span>
 
-	                      <h3 class="timeline-header"><a href="#">{{ $project->title }}</a></h3>
+	                      <h3 class="timeline-header"><a href="{{ route('frontend.projects.check', $project->uuid) }}">{{ $project->title }}</a></h3>
 
 	                      <div class="timeline-body">{{ $project->description }}</div>
 	                      <div class="timeline-footer">
@@ -66,25 +66,12 @@
                       <input type="email" class="form-control" id="inputEmail" placeholder="Email">
                     </div>
                   </div>
+
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                    <label for="inputFeedback" class="col-sm-2 control-label">Feedback</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" placeholder="Name">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-
-                    <div class="col-sm-10">
-                      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                      <textarea class="form-control" id="inputFeedback" placeholder="Feedback"></textarea>
                     </div>
                   </div>
                   <div class="form-group">

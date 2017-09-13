@@ -14,6 +14,10 @@ return [
     */
 
     'backend' => [
+    	'reports' => [
+    		'title' 		  => 'Report Management',
+    	],
+
     	'projects' => [
     		'title' 		  => 'Project Management',
             'all'             => 'All Projects',
