@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Faker\Generator;
+use App\Models\Report\Report;
 use App\Models\Vendor\Vendor;
 use App\Models\Project\Project;
 use App\Models\Access\Role\Role;
@@ -83,6 +84,8 @@ $factory->define(Vendor::class, function (Generator $faker) {
 
 $factory->define(Project::class, function (Generator $faker) {
 
+	$address = ['Jln Beethoven 2, Cyberjaya', 'Jalan Teknorat 5, Cyberjaya', 'Jalan Teknorat 6, Cyberjaya', 'Jalan Teknorat 7, Cyberjaya', 'Jalan Teknorat 8, Cyberjaya', 'Jalan P8e2, Putrajaya', 'Jalan P8e2/10, Putrajaya'];
+
 	$start = Carbon::now();
 
     return [
@@ -95,7 +98,7 @@ $factory->define(Project::class, function (Generator $faker) {
         'uuid'        		=> $faker->uuid,
         'title'         	=> $faker->sentence,
         'description'       => $faker->paragraph,
-        'address'          	=> $faker->address,
+        'address'          	=> $faker->randomElement($address),
         'latitude'    		=> $faker->latitude,
         'longitude'   		=> $faker->longitude,
         'started_at'   		=> $start,
@@ -109,5 +112,18 @@ $factory->state(Project::class, 'approved', function () {
             return factory(User::class)->states('active')->create()->id;
         },
         'approved_at' => Carbon::now()
+    ];
+});
+
+$factory->define(Report::class, function (Generator $faker) {
+    return [
+        'user_id' => function () {
+            return factory(User::class)->states('active')->create()->id;
+        },
+        'project_id' => function () {
+            return factory(Project::class)->create()->id;
+        },
+        'ip' => $faker->ipv4,
+        'feedback' => $faker->paragraph
     ];
 });

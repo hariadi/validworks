@@ -32,6 +32,14 @@ return [
     ],
 
     'backend' => [
+    	'reports' => [
+    		'view'		=> 'View Report',
+            'create'     => 'Create Report',
+            'lists'       => 'Report Lists ',
+            'edit'       => 'Edit Report',
+            'management' => 'Report Management',
+    	],
+
     	'projects' => [
     		'view'		=> 'View Project',
             'create'     => 'Create Project',
@@ -55,7 +63,9 @@ return [
                 'content' => [
                     'overview' => [
                     	'qrcode'		=> 'Qr Code',
+                    	'uuid'			=> 'UUID',
                     	'title'			=> 'Title',
+                    	'address'			=> 'Address',
                     	'description'	=> 'Description',
                     	'vendor'		=> 'Vendor',
                         'approved'    => 'Approved',

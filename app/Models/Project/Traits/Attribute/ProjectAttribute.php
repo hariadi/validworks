@@ -14,6 +14,12 @@ trait ProjectAttribute
     	return '<img src="data:image/png;base64, ' .base64_encode(QrCode::format('png')->size(200)->generate($this->uuid)) .'" class="img-thumbnail">';
     }
 
+    public function getLocationAttribute()
+    {
+    	//return $this->latitude && $this->longitude ? $this->latitude .','. $this->longitude : $this->address;
+    	return $this->address ?: $this->latitude .','. $this->longitude;
+    }
+
 	public function isVerified()
     {
     	return $this->verifies->contains('ip', request()->ip());

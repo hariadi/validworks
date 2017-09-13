@@ -14,8 +14,8 @@
 							  width="100%"
 							  height="500"
 							  frameborder="0" style="border:0"
-							  src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBPl9YmWREYZ6FLFa03YVXp4rH92uAtBJY&center={{ request('lat') }},{{ request('lng') }}" allowfullscreen>
-							</iframe>
+							  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBPl9YmWREYZ6FLFa03YVXp4rH92uAtBJY&q={{ $project->location }}" allowfullscreen>
+</iframe>
                 		</div>
                 		<div class="col-md-5">
 	                		<div class="panel panel-info">
@@ -27,7 +27,6 @@
 	                				<button type="button" class="btn btn-success btn-verify" data-choice="Yes">Yes</button>
 
 	                				<button type="button" class="btn btn-danger btn-verify" data-choice="No">No</button>
-
 
 	                				<span>Work site at the right location?</span>
 	                				@else

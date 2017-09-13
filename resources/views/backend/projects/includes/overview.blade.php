@@ -5,6 +5,13 @@
         <td>{!! $project->qrcode !!}</td>
     </tr>
 
+    @if(!auth()->guest())
+    <tr>
+        <th>{{ trans('labels.backend.projects.tabs.content.overview.uuid') }}</th>
+        <td>{!! $project->uuid_label !!}</td>
+    </tr>
+    @endif
+
     <tr>
         <th>{{ trans('labels.backend.projects.tabs.content.overview.title') }}</th>
         <td>{{ $project->title }}</td>
@@ -16,6 +23,11 @@
         <td>{{ $project->description }}</td>
     </tr>
     @endif
+
+    <tr>
+        <th>{{ trans('labels.backend.projects.tabs.content.overview.address') }}</th>
+        <td>{{ $project->address }}</td>
+    </tr>
 
     <tr>
         <th>{{ trans('labels.backend.projects.tabs.content.overview.vendor') }}</th>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Project\Project;
 use App\Http\Controllers\Controller;
 
 /**
@@ -14,7 +15,19 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        return view('frontend.index');
+    	$projects = Project::latest()->approved()->paginate(5);
+
+        return view('frontend.index')->withProjects($projects);
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function map()
+    {
+    	$projects = Project::approved()->get();
+
+        return view('frontend.map')->withProjects($projects);
     }
 
     /**

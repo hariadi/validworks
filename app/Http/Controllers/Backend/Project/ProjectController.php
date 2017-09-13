@@ -8,6 +8,7 @@ use App\Filters\ProjectFilters;
 use App\Models\Project\Project;
 use App\Http\Controllers\Controller;
 use App\Repositories\Backend\Project\ProjectRepository;
+use App\Http\Requests\Backend\Project\CreateProjectRequest;
 use App\Http\Requests\Backend\Project\ApproveProjectRequest;
 
 class ProjectController extends Controller
@@ -53,7 +54,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProjectRequest $request)
     {
         $this->projects->create($request->all());
 
