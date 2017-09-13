@@ -19,9 +19,6 @@ class ProjectController extends Controller
 
     	$locations = $request->only(['lat', 'lng']);
 
-    	//'https://maps.googleapis.com/maps/api/geocode/json?latlng=2.909047,101.654669&key=AIzaSyBPl9YmWREYZ6FLFa03YVXp4rH92uAtBJY'
-
-    	//dd($uuid, $request->all(), $project);
     	return view('frontend.projects.show')->withProject($project)->withLocations($locations);
     }
 

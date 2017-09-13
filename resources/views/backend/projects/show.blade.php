@@ -32,6 +32,10 @@
                     <li role="presentation">
                         <a href="#history" aria-controls="history" role="tab" data-toggle="tab">{{ trans('labels.backend.projects.tabs.titles.history') }}</a>
                     </li>
+
+                    <li role="presentation">
+                        <a href="#reports" aria-controls="reports" role="tab" data-toggle="tab">{{ trans('labels.backend.projects.tabs.titles.reports') }}</a>
+                    </li>
                 </ul>
 
                 <div class="tab-content">
@@ -43,6 +47,10 @@
                     <div role="tabpanel" class="tab-pane mt-30" id="history">
                         @include('backend.projects.includes.history')
                     </div><!--tab panel history-->
+
+                    <div role="tabpanel" class="tab-pane mt-30" id="reports">
+                        @include('backend.projects.includes.reports')
+                    </div><!--tab panel reports-->
 
                 </div><!--tab content-->
 

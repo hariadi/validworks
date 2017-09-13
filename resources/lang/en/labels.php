@@ -49,6 +49,7 @@ return [
                 'titles' => [
                     'overview' => 'Overview',
                     'history'  => 'History',
+                    'reports'	=> 'Reports',
                 ],
 
                 'content' => [
