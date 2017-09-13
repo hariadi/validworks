@@ -17,7 +17,7 @@ class ProjectController extends Controller
     		return view('frontend.projects.error');
     	}
 
-    	$locations = $request->only(['lat', 'long']);
+    	$locations = $request->only(['lat', 'lng']);
 
     	//'https://maps.googleapis.com/maps/api/geocode/json?latlng=2.909047,101.654669&key=AIzaSyBPl9YmWREYZ6FLFa03YVXp4rH92uAtBJY'
 
@@ -36,8 +36,8 @@ class ProjectController extends Controller
     		$validate->latitude = (float) request('lat');
     	}
 
-    	if (request('long') && preg_match('/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', request('long')) ) {
-    		$validate->longitude = (float) request('long');
+    	if (request('lng') && preg_match('/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/', request('lng')) ) {
+    		$validate->longitude = (float) request('lng');
     	}
 
     	$validate->project_id = $project->id;

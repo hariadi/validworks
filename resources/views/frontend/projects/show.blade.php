@@ -10,7 +10,12 @@
                 <div class="panel-body">
                 	<div class="row">
                 		<div class="col-md-7">
-                		{{ var_dump($locations, request()->ip()) }}
+                			<iframe
+							  width="100%"
+							  height="500"
+							  frameborder="0" style="border:0"
+							  src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBPl9YmWREYZ6FLFa03YVXp4rH92uAtBJY&center={{ request('lat') }},{{ request('lng') }}" allowfullscreen>
+							</iframe>
                 		</div>
                 		<div class="col-md-5">
 	                		<div class="panel panel-info">
@@ -76,7 +81,7 @@
 					choice: choice,
 					@if(isset($locations))
 					lat: "{{ $locations['lat'] }}",
-					long: "{{ $locations['long'] }}",
+					lng: "{{ $locations['lng'] }}",
 					@endif
 				}, function( response ) {
 					$('.panel-verify').html( "<span>Thanks!</span>" );
