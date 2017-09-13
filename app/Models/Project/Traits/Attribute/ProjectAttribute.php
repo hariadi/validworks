@@ -11,7 +11,7 @@ trait ProjectAttribute
 {
 	public function getQrCodeAttribute()
     {
-    	return '<img src="data:image/png;base64, ' .base64_encode(QrCode::format('png')->size(200)->generate(route('frontend.projects.check', $this->uuid))) .'" class="img-thumbnail">';
+    	return '<img src="data:image/png;base64, ' .base64_encode(QrCode::format('png')->size(200)->generate($this->uuid)) .'" class="img-thumbnail">';
     }
 
 	public function isVerified()
